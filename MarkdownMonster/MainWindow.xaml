@@ -25,6 +25,7 @@
         <KeyBinding Modifiers="Ctrl" Key="P"
                     Command="{Binding PrintPreviewCommand}" />
         <KeyBinding Modifiers="Ctrl+Shift" Key="S" Command="{Binding SaveAsCommand}" />
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveCommand}" />
         <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding NewDocumentCommand }"  />
         <KeyBinding Modifiers="Ctrl" Key="O" Command="{Binding OpenDocumentCommand }"    />
         <KeyBinding Modifiers="Ctrl" Key="W" Command="{Binding CloseActiveDocumentCommand}" />
@@ -118,7 +119,7 @@
                 <MenuItem Name="ButtonRecentFiles" Header="Recent documents">
                 </MenuItem>
                 <Separator/>
-                <MenuItem Name="ButtonSaveFile" Header="_Save" Command="{Binding SaveCommand}" 
+                <MenuItem Name="ButtonSaveFile" Header="_Save" Command="{Binding SaveCommand}"
                           InputGestureText="Ctrl+S"/>
                 <MenuItem Name="ButtonSaveAsFile" Header="Save _As " Command="{Binding SaveAsCommand}" 
                           InputGestureText="Ctrl+Shift+S"/>
