@@ -482,12 +482,16 @@ window.onresize = debounce(function() {
 // prevent window from loading image/file
 window.ondrop = function (event) {
     // don't allow dropping here - we can't get full file info
-    event.preventDefault();
-    event.stopPropagation();
 
-    setTimeout(function () {
-        te.mm.textbox.ShowMessage("To open dropped files in Markdown Monster, please drop files onto the header area of the window.","Invalid Drop Operation","Warning","Ok");
-    },50);
+    if (event.dataTransfer.files.length > 0) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        setTimeout(function() {
+                te.mm.textbox.ShowMessage("To open dropped files in Markdown Monster, please drop files onto the header area of the window.", "Invalid Drop Operation", "Warning", "Ok");
+            },
+            50);
+    }
 }
 
 //window.ondrop =
