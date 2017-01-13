@@ -106,6 +106,7 @@ namespace MarkdownMonster
             AllowDrop = true;
                         
             KeyUp += MainWindow_KeyUp;
+            PreviewKeyDown += MainWindow_PreviewKeyDown;
             Activated += OnActivated;
 
             // Singleton App startup - server code that listens for other instances
@@ -1372,6 +1373,36 @@ namespace MarkdownMonster
             //    Button_Handler(ButtonOpenFile, null);
             //}
 
+        }
+
+        private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (InputBinding inputBinding in InputBindings)
+            {
+                var keyGesture = inputBinding.Gesture as KeyGesture;
+                if (keyGesture?.Key == e.Key && keyGesture?.Modifiers == Keyboard.Modifiers && inputBinding.Command != null)
+                {
+                    inputBinding.Command.Execute(null);
+                    e.Handled = true;
+                }
+            }
+
+            foreach (CommandBinding cb in CommandBindings)
+            {
+                var command = cb.Command as RoutedCommand;
+                if (command == null)
+                    continue;
+
+                foreach (InputGesture inputGesture in command.InputGestures)
+                {
+                    var keyGesture = inputGesture as KeyGesture;
+                    if (keyGesture?.Key == e.Key && keyGesture?.Modifiers == Keyboard.Modifiers)
+                    {
+                        command.Execute(null, this);
+                        e.Handled = true;
+                    }
+                }
+            }
         }
 
         /// <summary>
